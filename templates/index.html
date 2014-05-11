@@ -16,9 +16,7 @@
   
   <div class="well">
     <form action="/" method=post enctype=multipart/form-data>
-        <textarea class="form-control" placeholder=" {{example}}" rows="10" name=content>
-          {% if old %}{{old}}{% endif %}
-        </textarea><br>
+        <textarea class="form-control" placeholder=" {{example}}" rows="10" name=content>{% if old %}{{old}}{% endif %}</textarea><br>
       <span class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="float:left">Example</span>
       <input type=submit value=Submit class="btn btn-default pull-right">
       <div class="clearfix"></div>
