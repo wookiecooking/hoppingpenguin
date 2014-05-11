@@ -2,6 +2,7 @@ import re
 from random import randint
 from flask import Flask
 from flask import request
+from flask import render_template
 
 app = Flask(__name__)
 
@@ -23,9 +24,9 @@ def hello():
   if request.method == 'POST':
     doh = request.form['content']
     spun = spinner(doh)
-    return '''<h1>hoppingpenguin</h1><b>Example: </b><span>I'm fairly new to {ASP.NET|PHP|Node.js|Python|Ruby|Golang}, I have just uploaded my files via {FileZilla|Cyberduck|SSH|Rsync|Form|CPANEL} but my {web config|settings|config|yaml} file isn't in the {root|top directory|same path} & it doesn't seem to be anywhere. {How can I retrieve it again?|How can I find my missing file?|How do I edit my .gitignore?}</span><br><br><form action="/" method=post enctype=multipart/form-data><textarea name=content style="width:100%;height:200px"></textarea><br><input type=submit value=Submit></form><h1>Results:</h1>'''+spun
+    return render_template('index.html', example = s, spun=spun)
   else:
-    return '''<h1>hoppingpenguin</h1><b>Example: </b><span>I'm fairly new to {ASP.NET|PHP|Node.js|Python|Ruby|Golang}, I have just uploaded my files via {FileZilla|Cyberduck|SSH|Rsync|Form|CPANEL} but my {web config|settings|config|yaml} file isn't in the {root|top directory|same path} & it doesn't seem to be anywhere. {How can I retrieve it again?|How can I find my missing file?|How do I edit my .gitignore?}</span><br><br><form action="/" method=post enctype=multipart/form-data><textarea name=content style="width:100%;height:200px"></textarea><br><input type=submit value=Submit></form><h1>Results:</h1>'''+ spinner(s)
+    return render_template('index.html', example = s, spun=spinner(s)) 
 
 if __name__ == "__main__":
     app.run()
