@@ -1,24 +1,30 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+  h1 a {color:black}
+  h1 a:hover{text-decoration:none}
+  .retwist{float:right;padding:1% 0;color:white}
+  .retwist:hover{text-decoration:none;color:white;cursor:pointer}
+</style>
+
 <div class="container">
-  <h1>hoppingpenguin</h1>
+  <h1><a href="/">hoppingpenguin</a></h1>
   <span class="help-block">
     <p class="text-info" style="float:left">Article Spinning:</p>
     <p class="text-danger">Proof of Concept</p>
-  </span><br>
+  </span>
   
   <div class="well">
     <form action="/" method=post enctype=multipart/form-data>
-      <textarea class="form-control" placeholder="{{example}}" rows="10" name=content></textarea>
-      <br>
-      <span class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="float:left">
-        Example
-      </span>
+        <textarea class="form-control" placeholder=" {{example}}" rows="10" name=content>{% if old %}{{old}}{% endif %}</textarea><br>
+      <span class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="float:left">Example</span>
       <input type=submit value=Submit class="btn btn-default pull-right">
       <div class="clearfix"></div>
     </form>
   </div>
   {% if spun %}
-  <div class="bs-callout bs-callout-danger">
+  <div class="bg-primary col-md-12">
+    <a class="retwist glyphicon glyphicon-retweet"></a>
     <h4>Results:</h4>
     <p>{{ spun }}</p>
   </div>
@@ -40,6 +46,10 @@
       </div>
     </div>
   </div>
+</div class="clearfix"></div><br><br>
+<p style="text-align:center">A Project by <a href="http://austinturnage.com">Austin Turnage</a></p>
 </div>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script>$('.retwist').on('click', function(){ $("form").submit() });</script>

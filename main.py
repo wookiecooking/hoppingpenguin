@@ -23,8 +23,11 @@ def spinner(s):
 def hello():
   if request.method == 'POST':
     doh = request.form['content']
-    spun = spinner(doh)
-    return render_template('index.html', example = s, spun=spun)
+    if doh:
+        spun = spinner(doh)
+        return render_template('index.html', example = s, spun=spun, old=doh)
+    else:
+        return render_template('index.html', example = s, spun=spinner(s)) 
   else:
     return render_template('index.html', example = s, spun=spinner(s)) 
 
