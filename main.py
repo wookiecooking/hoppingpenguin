@@ -25,9 +25,9 @@ def hello():
     doh = request.form['content']
     if doh:
         spun = spinner(doh)
-        return render_template('index.html', example = s, spun=spun, old=doh)
+        return spun
     else:
-        return render_template('index.html', example = s, spun=spinner(s)) 
+        return spinner(s)
   else:
     return render_template('index.html', example = s, spun=spinner(s)) 
 

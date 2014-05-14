@@ -3,36 +3,33 @@
 <style>
   h1 a {color:black}
   h1 a:hover{text-decoration:none}
+  .data {padding:1%;font-size:14px;}
   .retwist{float:right;padding:1% 0;color:white}
   .retwist:hover{text-decoration:none;color:white;cursor:pointer}
 </style>
 
 <div class="container">
   <h1><a href="/">hoppingpenguin</a></h1>
-  <span class="help-block">
+  <small>A Project by <a href="http://austinturnage.com">Austin Turnage</a></small>
+  <BR><BR><!-- <span class="help-block">
     <p class="text-info" style="float:left">Article Spinning:</p>
     <p class="text-danger">Proof of Concept</p>
-  </span>
+  </span> -->
   
-  <div class="well">
-    <form action="/" method=post enctype=multipart/form-data>
+  <div>
+    <form id="ajx" action="/" method=post enctype=multipart/form-data>
         <textarea class="form-control" placeholder=" {{example}}" rows="10" name=content>{% if old %}{{old}}{% endif %}</textarea><br>
       <span class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="float:left">Example</span>
       <input type=submit value=Submit class="btn btn-default pull-right">
       <div class="clearfix"></div>
     </form>
   </div>
-
-
   {% if spun %}
-  <div class="bg-primary col-md-12">
-    <a class="retwist glyphicon glyphicon-retweet"></a>
+    <a style="color:black" class="retwist glyphicon glyphicon-retweet"></a>
     <h4>Results:</h4>
-    <p>{{ spun }}</p>
+    <textarea rows="10" class="form-control data">{{ spun }}</textarea>
   </div>
   {% endif %}
-</div>
-
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -48,10 +45,28 @@
       </div>
     </div>
   </div>
-</div class="clearfix"></div><br><br>
-<p style="text-align:center">A Project by <a href="http://austinturnage.com">Austin Turnage</a></p>
 </div>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<script>$('.retwist').on('click', function(){ $("form").submit() });</script>
+<script>
+var frm = $('#ajx');
+frm.submit(function (ev) {
+  $.ajax({
+    type: frm.attr('method'),
+    url: frm.attr('action'),
+    data: frm.serialize()
+  })
+  .done(function(data) {
+    $('.data').text(data);
+  })
+  .fail(function() {
+    $('.data').text('error');
+  })
+  .always(function(data) {
+    $('.data').text(data);
+  });
+    ev.preventDefault();
+});
+$('.retwist').on('click',function(){frm.submit()});
+</script>
